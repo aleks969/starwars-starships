@@ -4,6 +4,7 @@ export default class StarWarsUniverse {
   constructor() {
     this.starships = [];
     this.starshipCount = 0;
+    this.luckyNumbers = [2, 5, 9, 10, 15, 17, 21, 22, 23, 27, 32];
   }
 
   async _getStarshipCount() {
@@ -16,8 +17,8 @@ export default class StarWarsUniverse {
   async _createStarships() {
     let counter = 0;
 
-    while (counter !== this.starshipCount) {
-      let url = `https://swapi.boom.dev/api/starships/${counter}`;
+    while (counter < 11) {
+      let url = `https://swapi.boom.dev/api/starships/${this.luckyNumbers[counter]}`;
 
       const res = await fetch(url);
       if (res.status === 404) {
@@ -35,6 +36,7 @@ export default class StarWarsUniverse {
           );
           // console.log(starship);
           this.starships.push(starship);
+          //this.luckyNumbers.push(counter);
         }
         counter++;
       }
@@ -104,5 +106,6 @@ export default class StarWarsUniverse {
     await this._createStarships();
     // console.log(this.starships);
     // console.log(this.theBestStarship);
+    // // console.log(this.luckyNumbers);
   }
 }
